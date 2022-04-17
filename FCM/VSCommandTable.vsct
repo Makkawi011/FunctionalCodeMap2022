@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct"/>
+  <Include href="VSGlobals.vsct"/>
+
+  <Commands package="FCM">
+    <Groups>
+      <Group guid="FCM" id="MyMenuGroup" priority="0x0600">
+                          <Parent guid="VSMainMenu" id="ItemNode.ViewBrowserGroup"/>
+      </Group>
+    </Groups>
+
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+    <Buttons>
+      <Button guid="FCM" id="MyCommand" priority="0x0600" type="Button">
+                                <Parent guid="VSMainMenu" id="ItemNode.ViewBrowserGroup" />
+              <Icon guid="ImageCatalogGuid" id="SketchflowTransitionEffect" />
+         <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Show on Functional Code Map</ButtonText>
+          <LocCanonicalName>.FCM.MyCommand</LocCanonicalName>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+    <VisibilityConstraints>
+    <VisibilityItem guid="FCM" id="MyCommand" context="CommandVisisiblity" />
+  </VisibilityConstraints>
+    
+  <Symbols>
+    <GuidSymbol name="CommandVisisiblity" value="{e392fc72-e6da-4a70-9473-41c6d6aea9a6}"/>
+      
+    <GuidSymbol name="FCM" value="{e392fc72-e6da-4a70-9473-41c6d6aea9a5}">
+      <IDSymbol name="MyMenuGroup" value="0x0001" />
+      <IDSymbol name="MyCommand" value="0x0100" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
