@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TextTemplating.VSHost;
 using FCM.Generators.Input;
 using FCM.Generators.Logic;
 using FCM.Generators.Output;
+using System.IO;
 
 namespace FCM.Generators;
 
@@ -21,18 +22,23 @@ class DGMLFileGenerator : BaseCodeGeneratorWithSite
     protected override byte[] GenerateCode(string inputFileName, string inputFileContent)
     {
 
-        List<MemberDeclarationSyntax> members = 
-            CostumeCode
-            .GetMembers()
-           ;
+        CostumeCode
+            .PrepareSyntaxTreesAndSymanticModels();
 
-        AnalyzeCustomeCode
-            .StartingFrom(inputFileContent, members);
+        AnalyzeCostumeCode
+            .StartingFrom(InputFilePath() , inputFileContent);
 
         return 
             DGML
             .GetDGMLCodeAsArrayOfBytes(); 
     }
 
+    private new string InputFilePath()
+    {
+        ThreadHelper.ThrowIfNotOnUIThread();
+        var item = GetService(typeof(EnvDTE.ProjectItem)) as EnvDTE.ProjectItem;
+        return item?.FileNames[1];
+    }
  
 }
+

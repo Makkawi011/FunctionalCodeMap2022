@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.MSBuild;
 
 using Solution = Microsoft.CodeAnalysis.Solution;
@@ -15,8 +14,7 @@ namespace FCM.Generators.Input;
 
 internal class CostumeCode
 {
-
-    public static List<MemberDeclarationSyntax> GetMembers()
+    public static void PrepareSyntaxTreesAndSymanticModels()
     {
         // custome solution = The solution that the user is trying this extinsion on it
         // get sln path for custome solution 
@@ -27,6 +25,7 @@ internal class CostumeCode
             .GetCurrentSolutionAsync()
             .Result
             .FullPath;
+        
 
         //now please whatch https://www.youtube.com/watch?v=_cIVa-RctcA&t=49s
 
@@ -43,28 +42,17 @@ internal class CostumeCode
         // in custome solution and
         // get list of SyntaxTreeInfo 
         // foreach for all associated files
-        var TreeInfos = Compile(solution);
+        //and save this infos in static list (SyntaxTreeInfos)
+        Compile(solution);
 
-        //Get Enumerable Of Members ForEach Tree
-        //then using SelectMany Function it will make all members for all trees in 1 list
-        var members = TreeInfos
-            .Select(t => t.SyntaxTree)
-            .SelectMany(GetEnumerableOfMembersForEachTree)
-            .ToList();
-
-
-        return members;
     }
-
-    private static IEnumerable<MemberDeclarationSyntax> GetEnumerableOfMembersForEachTree
-        (SyntaxTree tree) => tree.GetRoot().DescendantNodes().OfType<MemberDeclarationSyntax>();
 
 
     //we will fill it out when we compile the solution and it will use when you need to 
     private static List<SyntaxTreeInfo> SyntaxTreeInfos;
 
     ///Compile : impure function becouse it (write on) fill SyntaxTreeInfos list
-    private static List<SyntaxTreeInfo> Compile(Solution solution)
+    private static void Compile(Solution solution)
     {
         // compile all projects 
         // in input (/Custome) solution and
@@ -99,8 +87,6 @@ internal class CostumeCode
             }
 
         }
-
-        return SyntaxTreeInfos;  // static list
     }
 
 
@@ -116,6 +102,18 @@ internal class CostumeCode
 
         return semanticModel;
     }
+    public static SemanticModel GetSemanticModelFor(string inputFilePath)
+    {
+        var semanticModel =
+            SyntaxTreeInfos  // static list
+            .Where(s => s.SyntaxTree.FilePath == inputFilePath)
+            .Select(s => s.SemanticModel)
+            .FirstOrDefault();
+
+        return semanticModel;
+    }
+    public static List<SemanticModel> GetAllSemanticModel()
+        => SyntaxTreeInfos.Select(info => info.SemanticModel).ToList();
 }
 
 
