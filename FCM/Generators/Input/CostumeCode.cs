@@ -1,18 +1,20 @@
 ﻿#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
 
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.MSBuild;
 
 using Solution = Microsoft.CodeAnalysis.Solution;
 
 namespace FCM.Generators.Input;
 
-internal class CostumeCode
+internal static class CostumeCode
 {
     public static void PrepareSyntaxTreesAndSymanticModels()
     {
@@ -26,7 +28,6 @@ internal class CostumeCode
             .Result
             .FullPath;
         
-
         //now please whatch https://www.youtube.com/watch?v=_cIVa-RctcA&t=49s
 
         // to get information about custome solution  
@@ -102,18 +103,27 @@ internal class CostumeCode
 
         return semanticModel;
     }
-    public static SemanticModel GetSemanticModelFor(string inputFilePath)
-    {
-        var semanticModel =
-            SyntaxTreeInfos  // static list
-            .Where(s => s.SyntaxTree.FilePath == inputFilePath)
-            .Select(s => s.SemanticModel)
-            .FirstOrDefault();
 
-        return semanticModel;
+    /// <summary>
+    /// when you have the semantic model and
+    /// invocation from a source 
+    /// and you want to fetch the equivalent invocation from the input semantic model
+    /// </summary>
+    /// <param name="model">the semantic model from which we will get the equivalent invocation</param>
+    /// <param name="InputInvocation">a Invocation from a source </param>
+    /// <returns>an equivalent invocation to input invocation 
+    /// , from the input semantic model </returns>
+    public static InvocationExpressionSyntax GetEquivalentInvocationExpressionSyntaxFor(this SemanticModel model , InvocationExpressionSyntax InputInvocation)
+    {
+       var EquivalentInvocation =  model
+            .SyntaxTree
+            .GetRoot()
+            .DescendantNodes()
+            .OfType<InvocationExpressionSyntax>()
+            .FirstOrDefault(invoc => invoc.SyntaxTree.FilePath == InputInvocation.SyntaxTree.FilePath);
+
+        return EquivalentInvocation;
     }
-    public static List<SemanticModel> GetAllSemanticModel()
-        => SyntaxTreeInfos.Select(info => info.SemanticModel).ToList();
 }
 
 

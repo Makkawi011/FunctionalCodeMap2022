@@ -48,8 +48,16 @@
     <Compile Include="Generators\DGMLFileGenerator.cs" />
     <Compile Include="Generators\Input\SyntaxTreeInfo.cs" />
     <Compile Include="Generators\Input\CostumeCode.cs" />
-    <Compile Include="Generators\Logic\AnalyzeCostumeCode.cs" />
+    <Compile Include="Generators\Logic\Types\AnalyzeMethodResult.cs" />
+    <Compile Include="Generators\Logic\CostumeCodeAnalyzer.cs" />
+    <Compile Include="Generators\Logic\Memoization.cs" />
+    <Compile Include="Generators\Logic\AnalyzingAndPrinting\GlobalStatementsAnalyzers\GlobalInvocationsAnalyzer.cs" />
+    <Compile Include="Generators\Logic\AnalyzingAndPrinting\GlobalStatementsAnalyzers\LocalFunctionAnalyzer.cs" />
+    <Compile Include="Generators\Logic\AnalyzingAndPrinting\NonGlobalStatementsAnalyzers\MethodDeclerationAnalyzer.cs" />
+    <Compile Include="Generators\Logic\AnalyzingAndPrinting\StatementAnalyzer.cs" />
     <Compile Include="Generators\Logic\Painter.cs" />
+    <Compile Include="Generators\Logic\Types\StatementTypes\DecisionMaking.cs" />
+    <Compile Include="Generators\Logic\Types\StatementTypes\Loop.cs" />
     <Compile Include="Generators\Output\DGML.cs" />
     <Compile Include="Generators\Output\Types\CostumeCategory.cs" />
     <Compile Include="Generators\Output\Types\CostumeFlow.cs" />

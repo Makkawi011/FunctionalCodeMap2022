@@ -1,38 +1,42 @@
 ﻿namespace FCM.Generators.Output.Types;
 internal class CostumeFlow
 {
-    private string source;
+    private int source;
 
-    public string Source
+    public int Source
     {
         get { return source; }
         set { source = value; }
     }
-    private string target;
+    private int target;
 
-    public string Target
+    public int Target
     {
         get { return target; }
         set { target = value; }
     }
 
-    private string category;
+    private int category;
 
-    public string Category
+    public int Category
     {
         get { return category; }
         set { category = value; }
     }
-    public CostumeFlow(string source, string target, string category)
+    public CostumeFlow(int source, int target, int category)
     {
         Source = source;
         Target = target;
         Category = category;
     }
-    public CostumeFlow(string source, string target)
+    public CostumeFlow(int source, int target)
     {
         Source = source;
         Target = target;
+    }
+    public CostumeFlow()
+    {
+
     }
 }
 
