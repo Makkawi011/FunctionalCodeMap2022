@@ -2,9 +2,9 @@
 
 internal class CostumeFunction
 {
-    private string id;
+    private int id;
 
-    public string Id
+    public int Id
     {
         get { return id; }
         set { id = value; }
@@ -30,27 +30,30 @@ internal class CostumeFunction
         get { return group; }
         set { group = value; }
     }
-    private string category;
+    private CategoryId categoryId;
 
-    public string Category
+    public CategoryId CategoryId
     {
-        get { return category; }
-        set { category = value; }
+        get { return categoryId; }
+        set { categoryId = value; }
     }
 
-    public CostumeFunction(string id, string lable, string info, string group, string category)
+    public CostumeFunction(int id, string lable, string info, string group, CategoryId categoryId)
     {
         Id = id;
         Lable = lable;
         Info = info;
         Group = group;
-        Category = category;
+        CategoryId = categoryId;
     }
-    public CostumeFunction(string id, string lable, string category)
+    public CostumeFunction(int id, string lable, CategoryId categoryId)
     {
         Id = id;
         Lable = lable;
-        Category = category;
+        CategoryId = categoryId;
+    }
+    public CostumeFunction()
+    {
+
     }
 }
-

@@ -1,10 +1,16 @@
 ﻿namespace FCM.Generators.Output.Types;
 
+
+public enum CategoryId
+{
+    Par, Alt, Cho, Ite, Error
+}
+
 internal class CostumeCategory
 {
-    private string id;
+    private CategoryId id;
 
-    public string Id
+    public CategoryId Id
     {
         get { return id; }
         set { id = value; }
@@ -16,10 +22,9 @@ internal class CostumeCategory
         get { return background; }
         set { background = value; }
     }
-    public CostumeCategory(string id, string background)
+    public CostumeCategory(CategoryId id, string background)
     {
         Id = id;
         Background = background;
     }
 }
-

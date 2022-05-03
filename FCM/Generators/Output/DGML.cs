@@ -8,27 +8,29 @@ using OpenSoftware.DgmlTools.Builders;
 using OpenSoftware.DgmlTools.Model;
 
 using FCM.Generators.Output.Types;
-
+using FCM.Generators.Logic;
+using Microsoft.Build.Framework.XamlTypes;
+using Category = OpenSoftware.DgmlTools.Model.Category;
 
 namespace FCM.Generators.Output;
 
 internal class DGML
 {
+    static void Clear() { Functions.Clear(); Flows.Clear(); Memo.Forget(); }
+
     public static List<CostumeFunction> Functions = new();
     public static List<CostumeFlow> Flows = new();
     private static readonly List<CostumeCategory> Categories = new()
-    {
-        new CostumeCategory("Par", "Green"),
-        new CostumeCategory("Alt", "Yellow"),
-        new CostumeCategory("Cho", "Blue"),
-        new CostumeCategory("Ite", "Red") ,
-        new CostumeCategory("Error","Black")
+{
+        new CostumeCategory(CategoryId.Par, "Green"),
+        new CostumeCategory(CategoryId.Alt, "Yellow"),
+        new CostumeCategory(CategoryId.Cho, "Blue"),
+        new CostumeCategory(CategoryId.Ite, "Red"),
+        new CostumeCategory(CategoryId.Error, "Black")
     };
 
     public static byte[] GetDGMLCodeAsArrayOfBytes()
     {
-        //CosmeticImprovements
-        Functions.ForEach(f => f.Lable = f.Lable.Trim());
 
         DgmlBuilder builder = new()
         {
@@ -63,29 +65,34 @@ internal class DGML
 
         byte[] utf8EncodedXml = memoryStream.ToArray();
 
+
+        Clear();
+
         return utf8EncodedXml;
     }
+
+
 
     private static Node CustomeFunction2Node(CostumeFunction fun)
         => new()
         {
-            Id = fun.Id,
+            Id = fun.Id.ToString(),
             Label = fun.Lable,
             Description = fun.Info,
             Group = fun.Group,
-            Category = fun.Category
+            Category = fun.CategoryId.ToString()
         };
     private static Link CustomeFlow2Link(CostumeFlow flow)
         => new()
         {
-            Source = flow.Source,
-            Target = flow.Target,
-            Category = flow.Category
+            Source = flow.Source.ToString(),
+            Target = flow.Target.ToString(),
+            Category = flow.Category.ToString()
         };
     private static Category CreatCustomeCategory(CostumeCategory category)
         => new()
         {
-            Id = category.Id,
+            Id = category.Id.ToString(),
             Background = category.Background
         };
 }

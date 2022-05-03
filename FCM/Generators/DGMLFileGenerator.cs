@@ -25,7 +25,7 @@ class DGMLFileGenerator : BaseCodeGeneratorWithSite
         CostumeCode
             .PrepareSyntaxTreesAndSymanticModels();
 
-        AnalyzeCostumeCode
+        CostumeCodeAnalyzer
             .StartingFrom(InputFilePath() , inputFileContent);
 
         return 
