@@ -14,7 +14,11 @@ namespace FCM.Generators.Output;
 
 internal class DGML
 {
+<<<<<<< HEAD
+    static void Clear() { Functions.Clear(); Flows.Clear(); Memo.Forget(); }
+=======
     static void Clear() { Functions.Clear(); Flows.Clear(); Memoization.MemoMethods.Clear(); }
+>>>>>>> f6b4594e0d8e2a7dd027380df2258050966cddb2
 
     public static List<CostumeFunction> Functions = new();
     public static List<CostumeFlow> Flows = new();

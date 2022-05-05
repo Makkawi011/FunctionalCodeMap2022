@@ -50,10 +50,16 @@
     <Compile Include="Generators\Input\CostumeCode.cs" />
     <Compile Include="Generators\Logic\Types\AnalyzeMethodResult.cs" />
     <Compile Include="Generators\Logic\CostumeCodeAnalyzer.cs" />
+<<<<<<< HEAD
+    <Compile Include="Generators\Logic\Memo.cs" />
+    <Compile Include="Generators\Logic\AnalyzingAndPrinting\GlobalInvocationsAnalyzer.cs" />
+    <Compile Include="Generators\Logic\AnalyzingAndPrinting\FunctionAnalyzer.cs" />
+=======
     <Compile Include="Generators\Logic\Memoization.cs" />
     <Compile Include="Generators\Logic\AnalyzingAndPrinting\GlobalStatementsAnalyzers\GlobalInvocationsAnalyzer.cs" />
     <Compile Include="Generators\Logic\AnalyzingAndPrinting\GlobalStatementsAnalyzers\LocalFunctionAnalyzer.cs" />
     <Compile Include="Generators\Logic\AnalyzingAndPrinting\NonGlobalStatementsAnalyzers\MethodDeclerationAnalyzer.cs" />
+>>>>>>> f6b4594e0d8e2a7dd027380df2258050966cddb2
     <Compile Include="Generators\Logic\AnalyzingAndPrinting\StatementAnalyzer.cs" />
     <Compile Include="Generators\Logic\Painter.cs" />
     <Compile Include="Generators\Logic\Types\StatementTypes\DecisionMaking.cs" />
