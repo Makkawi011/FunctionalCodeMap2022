@@ -9,7 +9,6 @@ using OpenSoftware.DgmlTools.Model;
 
 using FCM.Generators.Output.Types;
 using FCM.Generators.Logic;
-using Microsoft.Build.Framework.XamlTypes;
 using Category = OpenSoftware.DgmlTools.Model.Category;
 
 namespace FCM.Generators.Output;
@@ -21,7 +20,7 @@ internal class DGML
     public static List<CostumeFunction> Functions = new();
     public static List<CostumeFlow> Flows = new();
     private static readonly List<CostumeCategory> Categories = new()
-{
+    {
         new CostumeCategory(CategoryId.Par, "Green"),
         new CostumeCategory(CategoryId.Alt, "Yellow"),
         new CostumeCategory(CategoryId.Cho, "Blue"),
@@ -72,16 +71,17 @@ internal class DGML
     }
 
 
-
     private static Node CustomeFunction2Node(CostumeFunction fun)
         => new()
         {
-            Id = fun.Id.ToString(),
+            Id = fun.CategoryId.ToString(),
             Label = fun.Lable,
             Description = fun.Info,
             Group = fun.Group,
             Category = fun.CategoryId.ToString()
         };
+
+
     private static Link CustomeFlow2Link(CostumeFlow flow)
         => new()
         {
@@ -89,6 +89,7 @@ internal class DGML
             Target = flow.Target.ToString(),
             Category = flow.CategoryId.ToString()
         };
+
     private static Category CreatCustomeCategory(CostumeCategory category)
         => new()
         {
