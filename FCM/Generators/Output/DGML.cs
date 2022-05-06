@@ -76,23 +76,23 @@ internal class DGML
     private static Node CustomeFunction2Node(CostumeFunction fun)
         => new()
         {
-            Id = fun.Id.ToString(),
+            Id = fun.Id,
             Label = fun.Lable,
             Description = fun.Info,
             Group = fun.Group,
-            Category = fun.CategoryId.ToString()
+            Category = fun.Category
         };
     private static Link CustomeFlow2Link(CostumeFlow flow)
         => new()
         {
-            Source = flow.Source.ToString(),
-            Target = flow.Target.ToString(),
-            Category = flow.Category.ToString()
+            Source = flow.Source,
+            Target = flow.Target,
+            Category = flow.Category
         };
     private static Category CreatCustomeCategory(CostumeCategory category)
         => new()
         {
-            Id = category.Id.ToString(),
+            Id = category.Id,
             Background = category.Background
         };
 }

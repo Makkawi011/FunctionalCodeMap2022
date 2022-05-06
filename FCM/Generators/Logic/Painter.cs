@@ -3,6 +3,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using FCM.Generators.Logic.AnalyzingAndPrinting;
 using LanguageExt;
+=======
+using FCM.Generators.Logic.AnalyzingAndPrinting.NonGlobalStatementsAnalyzers;
+using FCM.Generators.Logic.AnalyzingAndPrinting.GlobalStatementsAnalyzers;
+>>>>>>> f6b4594e0d8e2a7dd027380df2258050966cddb2
 
 namespace FCM.Generators.Logic;
 
