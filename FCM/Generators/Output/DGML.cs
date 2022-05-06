@@ -87,7 +87,7 @@ internal class DGML
         {
             Source = flow.Source.ToString(),
             Target = flow.Target.ToString(),
-            Category = flow.Category.ToString()
+            Category = flow.CategoryId.ToString()
         };
     private static Category CreatCustomeCategory(CostumeCategory category)
         => new()

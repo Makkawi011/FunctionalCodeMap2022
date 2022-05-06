@@ -16,18 +16,18 @@ internal class CostumeFlow
         set { target = value; }
     }
 
-    private int category;
+    private CategoryId categoryId;
 
-    public int Category
+    public CategoryId CategoryId
     {
-        get { return category; }
-        set { category = value; }
+        get { return categoryId; }
+        set { categoryId = value; }
     }
-    public CostumeFlow(int source, int target, int category)
+    public CostumeFlow(int source, int target, CategoryId category)
     {
         Source = source;
         Target = target;
-        Category = category;
+        CategoryId = category;
     }
     public CostumeFlow(int source, int target)
     {

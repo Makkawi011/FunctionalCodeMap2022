@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using FCM.Generators.Logic.Types;
 using FCM.Generators.Output;
@@ -65,7 +64,7 @@ internal static class Memo
                         {
                             Source = newId,
                             Target = defaultflow.Target,
-                            Category = defaultflow.Category
+                            CategoryId = defaultflow.CategoryId
                         });
 
                         ArrayFlowChanges[i, 0] = true;
@@ -77,7 +76,7 @@ internal static class Memo
                         {
                             Source = defaultflow.Source,
                             Target = newId,
-                            Category = defaultflow.Category
+                            CategoryId = defaultflow.CategoryId
                         });
 
                         ArrayFlowChanges[i, 1] = true;

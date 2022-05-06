@@ -13,12 +13,16 @@ internal class FunctionAnalyzer
 
     private static void Analyze(Either<MethodDeclarationSyntax, LocalFunctionStatementSyntax> method)
     {
-
+        var c =5;
+        
         if (method.HasBeenAnalyzedBefor())
         {
             method.AddKnownResultAnalyzesToFinalResults();
             return;
+
+            c = 10;
         }
+        int z = c;
 
         var statements = GetStatementsAsSyntaxNodes(method);
         var output = StatementAnalyzer.Analyze(statements);
