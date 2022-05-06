@@ -55,8 +55,12 @@
     <Compile Include="Generators\Logic\Memo.cs" />
     <Compile Include="Generators\Logic\Painter.cs" />
     <Compile Include="Generators\Logic\Types\AnalyzeMethodResult.cs" />
-    <Compile Include="Generators\Logic\Types\StatementTypes\DecisionMaking.cs" />
-    <Compile Include="Generators\Logic\Types\StatementTypes\Loop.cs" />
+    <Compile Include="Generators\Logic\Types\StatementTypes\Alternative.cs" />
+    <Compile Include="Generators\Logic\StatementClassifier.cs" />
+    <Compile Include="Generators\Logic\Types\StatementTypes\Invocation.cs" />
+    <Compile Include="Generators\Logic\Types\StatementTypes\Optional.cs" />
+    <Compile Include="Generators\Logic\Types\StatementTypes\Iteration.cs" />
+    <Compile Include="Generators\Logic\Types\StatementTypes\Parallel.cs" />
     <Compile Include="Generators\Output\DGML.cs" />
     <Compile Include="Generators\Output\Types\CostumeCategory.cs" />
     <Compile Include="Generators\Output\Types\CostumeFlow.cs" />

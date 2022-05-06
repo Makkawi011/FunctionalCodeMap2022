@@ -1,13 +1,10 @@
 ﻿// this file for Single File Generator and his work
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TextTemplating.VSHost;
 
 using FCM.Generators.Input;
 using FCM.Generators.Logic;
 using FCM.Generators.Output;
-using System.IO;
 
 namespace FCM.Generators;
 

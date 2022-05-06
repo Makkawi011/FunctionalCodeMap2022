@@ -1,10 +1,12 @@
 ﻿
+using System.Collections.Generic;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace FCM.Generators.Logic.Types.StatementTypes;
 
-internal class Loop
+internal class Iteration
 {
     private SyntaxNode statement;
 
@@ -13,22 +15,27 @@ internal class Loop
         get { return statement; }
         set { statement = value; }
     }
-    public Loop(ForEachStatementSyntax ForEachstatement)
+    public Iteration(ForEachStatementSyntax ForEachstatement)
     {
         Statement = ForEachstatement;
     }
-    public Loop(ForStatementSyntax ForStatement)
+    public Iteration(ForStatementSyntax ForStatement)
     {
         Statement = ForStatement;
     }
 
-    public Loop(WhileStatementSyntax whileStatement) 
+    public Iteration(WhileStatementSyntax whileStatement) 
     {
         Statement = whileStatement; 
     }
-
-    public Loop(DoStatementSyntax doStatement) 
+    
+    public Iteration(DoStatementSyntax doStatement) 
     {
         Statement = doStatement; 
+    }
+
+    public static AnalyzeMethodResult AnalyzeIterationStatement(Iteration IterationStatement)
+    {
+        throw new NotImplementedException();
     }
 }
