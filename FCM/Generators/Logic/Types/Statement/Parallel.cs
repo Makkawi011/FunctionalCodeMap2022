@@ -1,7 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
-
-namespace FCM.Generators.Logic.Types.StatementTypes;
+﻿
+namespace FCM.Generators.Logic.Types.Statement;
 
 internal class Parallel
 {

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using Microsoft.CodeAnalysis;
-using FCM.Generators.Logic.Types.StatementTypes;
+using FCM.Generators.Logic.Types.Statement;
+using FCM.Generators.Logic.AnalyzingAndPrinting;
+using System.Linq;
 
 namespace FCM.Generators.Logic;
 
@@ -40,45 +42,47 @@ internal class StatementClassifier
     }
     public static IEnumerable<StatementClassifier> Classify(IEnumerable<SyntaxNode> statements)
     {
+        statements = statements.Where(StatementAnalyzer.AnyInvocationContainedWithinStatement);
+
         var classifiers = new List<StatementClassifier>();
 
         foreach (var statement in statements)
         {
             //Alternative
-            if (CanCast(statement, typeof(TryStatementSyntax)))
+            if (CanCast<TryStatementSyntax>(statement))
             {
                 var alternativeStatement = new Alternative((TryStatementSyntax)statement);
                 classifiers.Add(new(alternativeStatement));
             }
             //Optional
-            else if (CanCast(statement, typeof(IfStatementSyntax)))
+            else if (CanCast<IfStatementSyntax>(statement))
             {
                 Optional OptionalStatement = new((IfStatementSyntax)statement);
                 classifiers.Add(new(OptionalStatement));
 
             }
-            else if (CanCast(statement, typeof(SwitchExpressionSyntax)))
+            else if (CanCast<SwitchExpressionSyntax>(statement))
             {
                 Optional OptionalStatement = new((SwitchStatementSyntax)statement);
                 classifiers.Add(new(OptionalStatement));
             }
             //Iteration
-            else if (CanCast(statement, typeof(ForEachStatementSyntax)))
+            else if (CanCast<ForEachStatementSyntax>(statement))
             {
                 Iteration IterationStatement = new((ForEachStatementSyntax)statement);
                 classifiers.Add(new(IterationStatement));
             }
-            else if (CanCast(statement, typeof(ForStatementSyntax)))
+            else if (CanCast<ForStatementSyntax>(statement))
             {
                 Iteration IterationStatement = new((ForStatementSyntax)statement);
                 classifiers.Add(new(IterationStatement));
             }
-            else if (CanCast(statement, typeof(WhileStatementSyntax)))
+            else if (CanCast<WhileStatementSyntax>(statement))
             {
                 Iteration IterationStatement = new((WhileStatementSyntax)statement);
                 classifiers.Add(new(IterationStatement));
             }
-            else if (CanCast(statement, typeof(DoStatementSyntax)))
+            else if (CanCast<DoStatementSyntax>(statement))
             {
                 Iteration IterationStatement = new((DoStatementSyntax)statement);
                 classifiers.Add(new(IterationStatement));
@@ -89,11 +93,11 @@ internal class StatementClassifier
         return classifiers;
     }
 
-    static bool CanCast(SyntaxNode statement, Type type)
+    static bool CanCast<T>(object statement)
     {
         try
         {
-            var s = Convert.ChangeType(statement, type);
+            var s = (T)statement;
             return true;
         }
         catch 

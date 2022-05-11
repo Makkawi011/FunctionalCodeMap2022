@@ -52,6 +52,12 @@ internal class CostumeFunction
         Lable = lable;
         CategoryId = categoryId;
     }
+    public CostumeFunction(int id, string lable, string methodContext)
+    {
+        Id = id;
+        Lable = lable;
+        info = methodContext;
+    }
     public CostumeFunction()
     {
 

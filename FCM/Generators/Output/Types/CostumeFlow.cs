@@ -1,4 +1,10 @@
 ﻿namespace FCM.Generators.Output.Types;
+
+enum Category
+{
+    Contains 
+}
+
 internal class CostumeFlow
 {
     private int source;
@@ -16,18 +22,18 @@ internal class CostumeFlow
         set { target = value; }
     }
 
-    private CategoryId categoryId;
+    private Category category;
 
-    public CategoryId CategoryId
+    public Category Category
     {
-        get { return categoryId; }
-        set { categoryId = value; }
+        get { return category; }
+        set { category = value; }
     }
-    public CostumeFlow(int source, int target, CategoryId category)
+    public CostumeFlow(int source, int target, Category category)
     {
         Source = source;
         Target = target;
-        CategoryId = category;
+        Category = category;
     }
     public CostumeFlow(int source, int target)
     {

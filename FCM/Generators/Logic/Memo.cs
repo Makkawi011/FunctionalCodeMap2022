@@ -64,7 +64,7 @@ internal static class Memo
                         {
                             Source = newId,
                             Target = defaultflow.Target,
-                            CategoryId = defaultflow.CategoryId
+                            Category = defaultflow.Category
                         });
 
                         ArrayFlowChanges[i, 0] = true;
@@ -76,7 +76,7 @@ internal static class Memo
                         {
                             Source = defaultflow.Source,
                             Target = newId,
-                            CategoryId = defaultflow.CategoryId
+                            Category = defaultflow.Category
                         });
 
                         ArrayFlowChanges[i, 1] = true;

@@ -81,7 +81,6 @@ internal static class  GlobalInvocationsAnalyzer
             .FirstOrDefault().GetSyntax() 
             as MethodDeclarationSyntax;
 
-        var orginalMethodAsString = orginalMethod.ToString();
 
 
     }

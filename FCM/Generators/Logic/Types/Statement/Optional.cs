@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-
-using LanguageExt;
-
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace FCM.Generators.Logic.Types.StatementTypes;
+namespace FCM.Generators.Logic.Types.Statement;
 
 internal class Optional
 {
