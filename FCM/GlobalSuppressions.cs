@@ -5,4 +5,3 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits", Justification = "<Pending>", Scope = "member", Target = "~M:FCM.Generators.Input.CostumeCode.GetMembers~System.Collections.Generic.List{Microsoft.CodeAnalysis.CSharp.Syntax.MemberDeclarationSyntax}")]

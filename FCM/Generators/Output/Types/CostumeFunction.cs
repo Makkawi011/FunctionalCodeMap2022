@@ -38,14 +38,14 @@ internal class CostumeFunction
         set { categoryId = value; }
     }
 
-    public CostumeFunction(int id, string lable, string info, string group, CategoryId categoryId)
+    public CostumeFunction(int id, string lable, string info, string group)
     {
         Id = id;
         Lable = lable;
         Info = info;
         Group = group;
-        CategoryId = categoryId;
     }
+
     public CostumeFunction(int id, string lable, CategoryId categoryId)
     {
         Id = id;

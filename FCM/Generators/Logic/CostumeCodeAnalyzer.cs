@@ -35,7 +35,7 @@ internal static class CostumeCodeAnalyzer
         var GlobalInvocations = GetAllGlobalInvocations(startSyntaxNodes);
         if (GlobalInvocations.Any())
         {
-            Painter.AnalyzeAndDrowStartingFrom(GlobalInvocations);
+            Painter.AnalyzeAndDrowStartingFrom(startSyntaxNodes);
             return;
         }
 
@@ -60,8 +60,6 @@ internal static class CostumeCodeAnalyzer
         DGML
             .Functions
             .Add(new CostumeFunction(-1, "No Global Invocation Or Local Funtion Or Method Decleration", CategoryId.Error));
-
-
 
     }
 

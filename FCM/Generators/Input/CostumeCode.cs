@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+using LanguageExt;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -41,16 +43,16 @@ internal static class CostumeCode
         // in custome solution and
         // get list of SyntaxTreeInfo 
         // foreach for all associated files
-        //and save this infos in static list (SyntaxTreeInfos)
+        //and save this infos in static list (Models)
         Compile(solution);
 
     }
 
 
     //we will fill it out when we compile the solution and it will use when you need to 
-    private static List<SyntaxTreeInfo> SyntaxTreeInfos;
+    private static List<SemanticModel> Models;
 
-    ///Compile : impure function becouse it (write on) fill SyntaxTreeInfos list
+    ///Compile : impure function becouse it (write on) fill Models list
     private static void Compile(Solution solution)
     {
         // compile all projects 
@@ -60,7 +62,7 @@ internal static class CostumeCode
         // go to https://www.youtube.com/watch?v=HT7k3Qm4uFY 
         // this source code https://github.com/raffaeler/dotnext2018Piter will help you
 
-        SyntaxTreeInfos = new List<SyntaxTreeInfo>(); // static list
+        Models = new List<SemanticModel>(); // static list
 
         var compilationTasks = solution.Projects
             .Select(s => s.GetCompilationAsync())
@@ -82,21 +84,20 @@ internal static class CostumeCode
             foreach (var syntaxTree in compilation.SyntaxTrees)
             {
                 var semanticModel = compilation.GetSemanticModel(syntaxTree, false);
-                SyntaxTreeInfos.Add(new SyntaxTreeInfo(syntaxTree, semanticModel));
+                Models.Add(semanticModel);
             }
 
         }
     }
 
 
-    ///GetSemanticModelFor : impure function becouse it read from SyntaxTreeInfos list
-    public static SemanticModel GetSemanticModelFor(SyntaxNode node)
+    ///GetSemanticModelFor : impure function becouse it read from Models list
+    public static SemanticModel GetSemanticModel(this SyntaxNode node)
     {
         var filePath = node.SyntaxTree.FilePath;
         var semanticModel =
-            SyntaxTreeInfos  // static list
+            Models  // static list
             .Where(s => s.SyntaxTree.FilePath == filePath)
-            .Select(s => s.SemanticModel)
             .FirstOrDefault();
 
         return semanticModel;
@@ -118,9 +119,58 @@ internal static class CostumeCode
              .GetRoot()
              .DescendantNodes()
              .OfType<InvocationExpressionSyntax>()
-             .FirstOrDefault(invoc => invoc.SyntaxTree.FilePath == InputInvocation.SyntaxTree.FilePath);
+             .FirstOrDefault(invoc => invoc.FullSpan == InputInvocation.FullSpan);
 
         return EquivalentInvocation;
+    }
+
+    public static Either<MethodDeclarationSyntax, LocalFunctionStatementSyntax> GetOrginalFunction
+        (this InvocationExpressionSyntax invocation)
+    {
+        //when you get Invocation from input file must be find Equivalent from costume files
+        //becouse
+        //the attribute of Input File Global Invocation
+        //differ from 
+        //the attribute of Global Invocation in costume files 
+
+        //for example :
+        //the attribute of Input File Global Invocation "Console.WriteLine();"
+        //when comming from InputFileContent and InputFilePath
+        //differ from the attribute of Global Invocation "Console.WriteLine();"
+        //in costume files 
+
+        //so we will work on "Console.WriteLine();" that coming from costume files 
+        //by get the Get Equivalent Invocation of "Console.WriteLine();" from from costume files
+
+
+        var model = GetSemanticModel(invocation);
+
+        var Invocation = model.GetEquivalentInvocationExpressionSyntaxFor(invocation);
+
+        var IMethodSymbolObj = model
+            .GetSymbolInfo(Invocation.Expression).Symbol
+            as IMethodSymbol;
+
+        var syntax = IMethodSymbolObj
+                .DeclaringSyntaxReferences
+                .FirstOrDefault();
+        try
+        {
+            return syntax.GetSyntax() as MethodDeclarationSyntax;
+        }
+        catch
+        {
+            try
+            {
+                return syntax.GetSyntax() as LocalFunctionStatementSyntax;
+            }
+            catch
+            {
+                throw new Exception($"We couldn't reach MethodDeclarationSyntax or LocalFunctionStatementSyntax for {invocation} ");
+            }
+
+        }
+
     }
 }
 

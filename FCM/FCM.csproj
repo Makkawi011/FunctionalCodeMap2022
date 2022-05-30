@@ -46,18 +46,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Generators\DGMLFileGenerator.cs" />
-    <Compile Include="Generators\Input\SyntaxTreeInfo.cs" />
     <Compile Include="Generators\Input\CostumeCode.cs" />
     <Compile Include="Generators\Logic\AnalyzingAndPrinting\FunctionAnalyzer.cs" />
     <Compile Include="Generators\Logic\AnalyzingAndPrinting\GlobalInvocationsAnalyzer.cs" />
     <Compile Include="Generators\Logic\AnalyzingAndPrinting\StatementAnalyzer.cs" />
     <Compile Include="Generators\Logic\CostumeCodeAnalyzer.cs" />
-    <Compile Include="Generators\Logic\IdMaker.cs" />
+    <Compile Include="Generators\Logic\Helper.cs" />
     <Compile Include="Generators\Logic\Memo.cs" />
     <Compile Include="Generators\Logic\Painter.cs" />
     <Compile Include="Generators\Logic\Types\AnalyzeMethodResult.cs" />
     <Compile Include="Generators\Logic\Types\Statement\Alternative.cs" />
-    <Compile Include="Generators\Logic\StatementClassifier.cs" />
+    <Compile Include="Generators\Logic\Types\StatementClassifier.cs" />
     <Compile Include="Generators\Logic\Types\Statement\Invocation.cs" />
     <Compile Include="Generators\Logic\Types\Statement\Optional.cs" />
     <Compile Include="Generators\Logic\Types\Statement\Iteration.cs" />

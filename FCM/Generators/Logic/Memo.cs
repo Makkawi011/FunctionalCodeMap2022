@@ -19,11 +19,10 @@ internal static class Memo
         (this Either<MethodDeclarationSyntax, LocalFunctionStatementSyntax> method)
         => MemoMethods.ContainsKey(method);
 
-    public static void MemoAndAddToFinalResultsFor
+    public static void Memoize
         (this AnalyzeMethodResult output ,  Either<MethodDeclarationSyntax, LocalFunctionStatementSyntax> input )
     {
         MemoMethods.Add(input,output);
-        input.AddKnownResultAnalyzesToFinalResults();
     }
 
     public static void AddKnownResultAnalyzesToFinalResults

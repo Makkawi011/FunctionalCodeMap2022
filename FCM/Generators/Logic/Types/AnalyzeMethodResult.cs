@@ -21,4 +21,10 @@ internal class AnalyzeMethodResult
         get { return flows; }
         set { flows = value; }
     }
+
+    public AnalyzeMethodResult()
+    {
+        Flows = new();
+        functions = new();
+    }
 }
